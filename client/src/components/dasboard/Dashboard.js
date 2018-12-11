@@ -23,8 +23,56 @@ class Dashboard extends Component {
       );
     } else {
       // console.log(profile);
+      const { handle, location, bio } = this.props.profile.profile;
+      let bioContent;
+      let locationContent;
+      let handleContent;
+      if (bio) {
+        bioContent = (
+          <div>
+            Here's your bio:
+            <br />
+            <br />
+            {bio}
+          </div>
+        );
+      }
+      if (location) {
+        locationContent = (
+          <div>
+            Your location(other users can see this):
+            <br />
+            <br />
+            {locationContent}
+          </div>
+        );
+      }
+      if (handle) {
+        handleContent = (
+          <div>
+            Your profile Handle:
+            <br />
+            <br />
+            {handle}
+          </div>
+        );
+      }
       if (Object.keys(profile).length > 0) {
-        content = <div>Profile is shown here</div>;
+        content = (
+          <div>
+            {bioContent}
+            <br />
+            {locationContent}
+            {handleContent}
+            <div>
+              {" "}
+              <Link to="create-profile">
+                {" "}
+                <Button type="primary">Edit your profile</Button>
+              </Link>
+            </div>
+          </div>
+        );
       } else {
         content = (
           <div>

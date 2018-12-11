@@ -4,9 +4,18 @@ import PropTypes from "prop-types";
 import "./common.css";
 
 const { TextArea } = Input;
-const TextAreaGroup = ({ id, placeholder, value, errors, onChange, rows }) => {
+const TextAreaGroup = ({
+  id,
+  placeholder,
+  value,
+  errors,
+  onChange,
+  rows,
+  label
+}) => {
   return (
     <div className="textArea">
+      <h3>{label}</h3>
       <TextArea
         rows={rows}
         id={id}
@@ -24,7 +33,8 @@ TextAreaGroup.propTypes = {
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  error: PropTypes.string
+  errors: PropTypes.string,
+  label: PropTypes.string.isRequired
 };
 
 export default TextAreaGroup;

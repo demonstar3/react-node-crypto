@@ -7,14 +7,16 @@ const TextField = ({
   id,
   placeholder,
   value,
-  error,
+  errors,
   onChange,
   autosize,
   icon,
-  size
+  size,
+  label
 }) => {
   return (
     <div className="textField">
+      <h3>{label}</h3>
       <Input
         placeholder={placeholder}
         autosize={autosize}
@@ -24,7 +26,7 @@ const TextField = ({
         onChange={onChange}
         value={value}
       />
-      {error ? <span className="error">{error}</span> : null}
+      {errors ? <span className="error">{errors}</span> : null}
     </div>
   );
 };
@@ -36,7 +38,8 @@ TextField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+  label: PropTypes.string.isRequired
 };
 
 export default TextField;
