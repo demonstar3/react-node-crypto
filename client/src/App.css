@@ -1,0 +1,5 @@
+@import "~antd/dist/antd.css";
+
+.content {
+  min-height: 90vh;
+}

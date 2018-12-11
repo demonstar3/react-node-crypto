@@ -1,0 +1,12 @@
+.error {
+  color: "red";
+}
+
+.textField {
+  width: 70%;
+  margin: 5% auto;
+}
+.textArea {
+  width: 70%;
+  margin: 5% auto;
+}

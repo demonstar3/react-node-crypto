@@ -1,0 +1,23 @@
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 500px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 80%;
+  margin: auto;
+}
+.carouselItem {
+  padding-top: 150px;
+  color: white;
+}
+.carouselTitle {
+  font-size: 50px;
+  text-align: center;
+}
+.Home {
+  margin: 5%;
+}

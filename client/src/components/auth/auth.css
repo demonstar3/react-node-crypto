@@ -1,0 +1,20 @@
+.form {
+  max-width: 500px;
+  margin: 40px auto auto auto;
+  padding: 10px;
+}
+
+.formButton {
+  margin: 10px;
+}
+
+.formTitle {
+  text-align: center;
+  margin-top: 90px;
+}
+
+.error {
+  color: red;
+  padding: 0;
+  margin: 0;
+}

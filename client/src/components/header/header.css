@@ -1,0 +1,27 @@
+.Header {
+  font-size: 100px;
+  text-align: center;
+  height: auto;
+  color: #707070;
+  margin: 2%;
+}
+.nav {
+  text-align: center;
+  padding-top: 1%;
+}
+.navItem {
+  font-weight: 600;
+}
+
+.quote {
+  font-size: 20px;
+  color: #a8a8a8;
+}
+
+.link {
+  color: inherit;
+}
+
+.greeting {
+  margin-left: 20%;
+}
