@@ -11,7 +11,8 @@ const TextAreaGroup = ({
   errors,
   onChange,
   rows,
-  label
+  label,
+  defaultValue
 }) => {
   return (
     <div className="textArea">
@@ -22,6 +23,7 @@ const TextAreaGroup = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        defaultValue={defaultValue}
       />
       {errors ? <span className="error">{errors}</span> : null}
     </div>
@@ -34,7 +36,8 @@ TextAreaGroup.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.string,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string
 };
 
 export default TextAreaGroup;

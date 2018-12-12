@@ -4,6 +4,8 @@ import { getProfile } from "../../actions/profileActions";
 import PropTypes from "prop-types";
 import { Icon, Button } from "antd";
 import { Link } from "react-router-dom";
+import DashboardComps from "./DashboardComps";
+import "./dashboard.css";
 
 class Dashboard extends Component {
   componentWillMount() {
@@ -16,61 +18,36 @@ class Dashboard extends Component {
 
     if (loading || profile === null) {
       content = (
-        <div>
+        <div style={{ textAlign: "center" }}>
           <Icon style={{ height: "100px", width: "100px" }} type="loading" />
-          HELLO
+          <h1>
+            {" "}
+            We are fetching your Proffile!
+            <br /> One moment please!
+          </h1>
         </div>
       );
     } else {
-      // console.log(profile);
       const { handle, location, bio } = this.props.profile.profile;
-      let bioContent;
-      let locationContent;
-      let handleContent;
-      if (bio) {
-        bioContent = (
-          <div>
-            Here's your bio:
-            <br />
-            <br />
-            {bio}
-          </div>
-        );
-      }
-      if (location) {
-        locationContent = (
-          <div>
-            Your location(other users can see this):
-            <br />
-            <br />
-            {locationContent}
-          </div>
-        );
-      }
-      if (handle) {
-        handleContent = (
-          <div>
-            Your profile Handle:
-            <br />
-            <br />
-            {handle}
-          </div>
-        );
-      }
+      const {
+        twitter,
+        youtube,
+        facebook,
+        instagram
+      } = this.props.profile.profile.social;
+
       if (Object.keys(profile).length > 0) {
         content = (
-          <div>
-            {bioContent}
-            <br />
-            {locationContent}
-            {handleContent}
-            <div>
-              {" "}
-              <Link to="create-profile">
-                {" "}
-                <Button type="primary">Edit your profile</Button>
-              </Link>
-            </div>
+          <div className="center dashboard">
+            <DashboardComps
+              handle={handle}
+              location={location}
+              bio={bio}
+              twitter={twitter}
+              youtube={youtube}
+              instagram={instagram}
+              facebook={facebook}
+            />
           </div>
         );
       } else {
@@ -86,7 +63,12 @@ class Dashboard extends Component {
       }
       //   content = <div>Content</div>;
     }
-    return <div>{content}</div>;
+    return (
+      <div>
+        <h1 className="center title">Dashboard</h1>
+        {content}
+      </div>
+    );
   }
 }
 

@@ -12,7 +12,8 @@ const TextField = ({
   autosize,
   icon,
   size,
-  label
+  label,
+  defaultValue
 }) => {
   return (
     <div className="textField">
@@ -25,6 +26,7 @@ const TextField = ({
         size={size}
         onChange={onChange}
         value={value}
+        defaultValue={defaultValue}
       />
       {errors ? <span className="error">{errors}</span> : null}
     </div>
@@ -39,6 +41,7 @@ TextField.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,
+  defaultValue: PropTypes.string,
   label: PropTypes.string.isRequired
 };
 
