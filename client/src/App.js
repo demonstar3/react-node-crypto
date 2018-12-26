@@ -17,8 +17,9 @@ import NotFound from "./components/notFound/NotFound";
 import PageFooter from "./components/footer/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/common/PrivateRoute";
-import CreateProfile from "./components/profile/CreateProfile";
-import EditProfile from "./components/profile/EditProfile";
+import EditProfile from "./components/profileComps/create-edit-profile/EditProfile";
+import ProfilesPage from "./components/profileComps/profiles/ProfilesPage";
+import Profile from "./components/profileComps/profile/Profile";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -49,12 +50,10 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={LoginForm} />
+                <Route exact path="/profiles" component={ProfilesPage} />
+                <Route exact path="/profile/:handle" component={Profile} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                <PrivateRoute
-                  exact
-                  path="/create-profile"
-                  component={CreateProfile}
-                />
+
                 <PrivateRoute
                   exact
                   path="/edit-profile"

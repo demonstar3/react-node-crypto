@@ -8,6 +8,7 @@ const passport = require("passport");
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const Profile = require("../../models/Profile");
 
 //register
 router.post("/register", (req, res) => {
@@ -35,12 +36,18 @@ router.post("/register", (req, res) => {
       password: req.body.password
     });
 
+    let profileFields = {
+      username: req.body.username,
+      handle: req.body.username,
+      user: newUser._id
+    };
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(newUser.password, salt, (err, hash) => {
         if (err) throw err;
         newUser.password = hash;
         newUser
           .save()
+          .then(new Profile(profileFields).save())
           .then(user => res.json(user))
           .catch(err => console.log(err));
       });

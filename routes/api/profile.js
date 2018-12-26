@@ -40,6 +40,7 @@ router.get("/handle/:handle", (req, res) => {
         errors.noProfile = "There is no profile found for this user";
         return res.status(404).json(errors);
       }
+
       return res.json(profile);
     })
     .catch(err => res.status(404).json(err));
@@ -94,7 +95,7 @@ router.post(
     }
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (req.body.handle) profileFields.handle = req.body.handle;
+    if (req.body.username) profileFields.username = req.body.username;
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.coins) profileFields.coins = req.body.coins;
     if (req.body.bio) profileFields.bio = req.body.bio;
@@ -108,22 +109,16 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         //update
+
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
           { new: true }
-        ).then(profile => res.json(profile));
+        )
+          .then(profile => res.json(profile))
+          .catch(err => console.log(err));
       } else {
         //create
-        Profile.findOne({ handle: profileFields.handle }).then(profile => {
-          if (profile) {
-            errors.handle = "That handle already exists";
-            res.status(400).json(errors);
-          }
-
-          //save Profile
-          new Profile(profileFields).save().then(profile => res.json(profile));
-        });
       }
     });
   }

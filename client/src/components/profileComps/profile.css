@@ -1,0 +1,54 @@
+.profileForm {
+  margin: 0;
+}
+.button {
+  margin: 0px 0px 0px 15%;
+}
+
+.profiles-page {
+  margin: 10%;
+}
+.view-profile {
+  margin: 10px;
+}
+.profile-username {
+  font-size: 7em;
+  margin: 0px 50px;
+}
+.user-icon {
+  font-size: 100px;
+  float: right;
+  margin-right: 80px;
+}
+
+.social-icon {
+  font-size: 4em;
+  margin: 0px 0 0 70px;
+  display: inline-block;
+}
+
+.profile-bio {
+  display: inline-block;
+  margin-left: 50%;
+  font-size: 2em;
+}
+@media only screen and (max-width: 600px) {
+  .profile-username {
+    font-size: 4em;
+    text-align: center;
+  }
+  .user-icon {
+    float: none;
+    margin: 20px;
+  }
+  .social-icon {
+    font-size: 2em;
+    text-align: center;
+    margin: 0;
+  }
+  .profile-bio {
+    text-align: center;
+    display: block;
+    margin: 0;
+  }
+}

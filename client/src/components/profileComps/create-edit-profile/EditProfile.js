@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Form, Icon, Button } from "antd";
-import TextAreaGroup from "../common/TextAreaGroup";
-import TextField from "../common/TextField";
-import "./profile.css";
-import { createProfile, getProfile } from "../../actions/profileActions";
+import { Form, Button } from "antd";
+import TextAreaGroup from "../../common/TextAreaGroup";
+import TextField from "../../common/TextField";
+import "../profile.css";
+import { createProfile, getProfile } from "../../../actions/profileActions";
 import { withRouter } from "react-router-dom";
-import isEmpty from "../../validation/is-empty";
+import isEmpty from "../../../validation/is-empty";
 const FormItem = Form.Item;
 
 class EditProfile extends Component {
@@ -15,7 +15,6 @@ class EditProfile extends Component {
     super(props);
     this.state = {
       displaySocialInputs: false,
-      handle: "",
       location: "",
       bio: "",
       twitter: "",
@@ -32,7 +31,6 @@ class EditProfile extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const profileData = {
-      handle: this.state.handle,
       location: this.state.location,
       bio: this.state.bio,
       twitter: this.state.twitter,
@@ -55,7 +53,6 @@ class EditProfile extends Component {
     }
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
-      profile.handle = !isEmpty(profile.handle) ? profile.handle : "";
       profile.location = !isEmpty(profile.location) ? profile.location : "";
       profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
       profile.social = !isEmpty(profile.social) ? profile.social : {};
@@ -85,7 +82,6 @@ class EditProfile extends Component {
   }
   render() {
     const { errors, displaySocialInputs } = this.state;
-    const { profile } = this.props.profile;
     let socialInputs;
     //SOCIAL INPUTS
     if (displaySocialInputs) {
@@ -137,17 +133,6 @@ class EditProfile extends Component {
     return (
       <div>
         <Form onSubmit={this.handleSubmit} className="profileForm">
-          <FormItem>
-            <TextField
-              label="This is your handle"
-              placeholder="Handle"
-              id="handle"
-              size="large"
-              onChange={this.onChange}
-              value={this.state.handle}
-              errors={errors.handle ? errors.handle : null}
-            />
-          </FormItem>
           <FormItem>
             <TextField
               label="Where are you located?"

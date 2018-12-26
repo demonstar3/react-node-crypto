@@ -8,7 +8,7 @@ const ProfileSchema = new Schema({
   },
   handle: {
     type: String,
-    required: true,
+
     max: 40
   },
   location: {
@@ -18,8 +18,10 @@ const ProfileSchema = new Schema({
     type: [String]
   },
   bio: {
-    type: String,
-    required: true
+    type: String
+  },
+  username: {
+    type: String
   },
   social: {
     youtube: {

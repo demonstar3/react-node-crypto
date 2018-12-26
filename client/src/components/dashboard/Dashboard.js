@@ -13,7 +13,6 @@ class Dashboard extends Component {
   }
   render() {
     let content;
-    const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
     if (loading || profile === null) {
@@ -22,21 +21,16 @@ class Dashboard extends Component {
           <Icon style={{ height: "100px", width: "100px" }} type="loading" />
           <h1>
             {" "}
-            We are fetching your Proffile!
+            We are fetching your Profile!
             <br /> One moment please!
           </h1>
         </div>
       );
     } else {
-      const { handle, location, bio } = this.props.profile.profile;
-      const {
-        twitter,
-        youtube,
-        facebook,
-        instagram
-      } = this.props.profile.profile.social;
-
       if (Object.keys(profile).length > 0) {
+        const { handle, location, bio } = this.props.profile.profile;
+        const { twitter, youtube, facebook, instagram } =
+          this.props.profile.profile.social || {};
         content = (
           <div className="center dashboard">
             <DashboardComps
