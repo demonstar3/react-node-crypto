@@ -8,8 +8,9 @@ import DashboardComps from "./DashboardComps";
 import "./dashboard.css";
 
 class Dashboard extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.getProfile();
+    console.log("hello");
   }
   render() {
     let content;

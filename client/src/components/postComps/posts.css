@@ -1,0 +1,20 @@
+.posts-item {
+  margin: 70px auto;
+  width: 70%;
+}
+.post-text {
+  font-size: 3em;
+  margin: 20px;
+}
+.post-title {
+  font-size: 6em;
+}
+@media only screen and (max-width: 600px) {
+  .post-title {
+    font-size: 3em;
+  }
+  .post-text {
+    font-size: 1.5em;
+    margin: 5px;
+  }
+}

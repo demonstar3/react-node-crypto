@@ -107,19 +107,15 @@ router.post(
     if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
 
     Profile.findOne({ user: req.user.id }).then(profile => {
-      if (profile) {
-        //update
+      //update
 
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        )
-          .then(profile => res.json(profile))
-          .catch(err => console.log(err));
-      } else {
-        //create
-      }
+      Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      )
+        .then(profile => res.json(profile))
+        .catch(err => console.log(err));
     });
   }
 );

@@ -13,7 +13,7 @@ module.exports = function validatePostInput(data) {
   if (Validator.isEmpty(data.text)) {
     errors.text = "Text is required";
   }
-  if (!Validator.isLength(data.title, { min: 5, max: 30 })) {
+  if (!Validator.isLength(data.title, { min: 5, max: 70 })) {
     errors.title = "Your post title must be between 5 and 30 characters";
   }
   if (Validator.isEmpty(data.title)) {

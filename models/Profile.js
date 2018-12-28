@@ -17,6 +17,11 @@ const ProfileSchema = new Schema({
   coins: {
     type: [String]
   },
+  posts: [
+    {
+      post: String
+    }
+  ],
   bio: {
     type: String
   },

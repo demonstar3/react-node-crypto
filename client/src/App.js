@@ -20,6 +20,9 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import EditProfile from "./components/profileComps/create-edit-profile/EditProfile";
 import ProfilesPage from "./components/profileComps/profiles/ProfilesPage";
 import Profile from "./components/profileComps/profile/Profile";
+import PostForm from "./components/postComps/create-edit-post/PostForm";
+import Feed from "./components/feed/Feed";
+import Post from "./components/postComps/post/Post";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -52,6 +55,13 @@ class App extends Component {
                 <Route exact path="/login" component={LoginForm} />
                 <Route exact path="/profiles" component={ProfilesPage} />
                 <Route exact path="/profile/:handle" component={Profile} />
+                <Route exact path="/profile/:handle" component={Profile} />
+                <Route exact path="/post/:id" component={Post} />
+
+                <PrivateRoute exact path="/make-a-post" component={PostForm} />
+
+                <PrivateRoute exact path="/feed" component={Feed} />
+
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
 
                 <PrivateRoute

@@ -35,11 +35,11 @@ class Navbar extends Component {
             mode="horizontal"
             className="nav"
           >
-            <Menu.Item key="posts" className="navItem">
-              <Link to="/"> Posts</Link>
+            <Menu.Item key="feed" className="navItem">
+              <Link to="/feed"> Feed</Link>
             </Menu.Item>
-            <Menu.Item key="topposts" className="navItem">
-              Top Posts
+            <Menu.Item key="home" className="navItem">
+              <Link to="/"> Home</Link>
             </Menu.Item>
             <Menu.Item key="profile" className="navItem">
               <Link to="/dashboard"> My Profile</Link>
@@ -70,11 +70,8 @@ class Navbar extends Component {
             mode="horizontal"
             className="nav"
           >
-            <Menu.Item key="posts" className="navItem">
-              <Link to="/"> Posts</Link>
-            </Menu.Item>
-            <Menu.Item key="topposts" className="navItem">
-              Top Posts
+            <Menu.Item key="home" className="navItem">
+              <Link to="/"> Home</Link>
             </Menu.Item>
             <Menu.Item key="login" className="navItem">
               <Link to="/login"> Login</Link>

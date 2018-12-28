@@ -81,8 +81,22 @@ router.post(
       title: req.body.title,
       user: req.user.id
     });
+    let profileFields = {
+      posts: []
+    };
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      if (profile.posts !== []) {
+        profileFields.posts = profile.posts;
+      }
 
-    newPost.save().then(post => res.json(post));
+      profile.posts.unshift({ post: newPost._id });
+      profile.save().catch(err => console.log(err));
+    });
+
+    newPost
+      .save()
+      .then(post => res.json(post))
+      .catch(err => console.log(err));
   }
 );
 
@@ -100,9 +114,20 @@ router.delete(
               .json({ notauthorized: "User not authorized" });
           }
 
+          Profile.findOne({ user: req.user.id }).then(profile => {
+            for (var i = profile.posts.length - 1; i >= 0; i--) {
+              if (profile.posts[i].post === req.params.id) {
+                profile.posts.splice(i, 1);
+                // break;       //<-- Uncomment  if only the first term has to be removed
+              }
+            }
+            profile.save().catch(err => console.log(`uhoh : ${err}`));
+            // .catch(err => console.log(err));
+          });
           post.remove().then(() => res.json({ sucess: true }));
         })
-        .catch(err =>
+        .catch(
+          // err => console.log(err),
           res.status(404).json({ postnotfound: "No post was found" })
         );
     });

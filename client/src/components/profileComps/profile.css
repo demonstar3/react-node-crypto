@@ -22,16 +22,21 @@
 }
 
 .social-icon {
-  font-size: 4em;
-  margin: 0px 0 0 70px;
-  display: inline-block;
+  font-size: 1em;
+  margin: 0px 15px;
+  width: auto;
 }
 
 .profile-bio {
-  display: inline-block;
-  margin-left: 50%;
+  margin: 20px 50px 0px 50px;
   font-size: 2em;
 }
+.ignore {
+  display: none;
+}
+
+/* .profile-posts {
+} */
 @media only screen and (max-width: 600px) {
   .profile-username {
     font-size: 4em;
@@ -42,13 +47,14 @@
     margin: 20px;
   }
   .social-icon {
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
     margin: 0;
+    display: inline-block;
   }
   .profile-bio {
     text-align: center;
     display: block;
-    margin: 0;
+    margin: auto;
   }
 }

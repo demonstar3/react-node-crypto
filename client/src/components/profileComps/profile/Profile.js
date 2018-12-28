@@ -5,6 +5,8 @@ import { getProfileByHandle } from "../../../actions/profileActions";
 import { Icon } from "antd";
 import SocialMedia from "./SocialMedia";
 import isEmpty from "../../../validation/is-empty";
+import ProfilePosts from "./ProfilePosts";
+import "../profile.css";
 
 class Profile extends Component {
   componentDidMount() {
@@ -38,21 +40,25 @@ class Profile extends Component {
               <Icon type="user" />
             </span>
             {profile.username}
+
+            <span>
+              <SocialMedia
+                /* prettier-ignore */
+                instagram={profile.social.instagram ? profile.social.instagram : null}
+                /* prettier-ignore */
+                facebook={profile.social.facebook ? profile.social.facebook : null}
+                youtube={profile.social.youtube ? profile.social.youtube : null}
+                twitter={profile.social.twitter ? profile.social.twitter : null}
+              />
+            </span>
           </h1>
-          <div>
-            <SocialMedia
-              /* prettier-ignore */
-              instagram={profile.social.instagram ? profile.social.instagram : null}
-              /* prettier-ignore */
-              facebook={profile.social.facebook ? profile.social.facebook : null}
-              youtube={profile.social.youtube ? profile.social.youtube : null}
-              twitter={profile.social.twitter ? profile.social.twitter : null}
-            />
-            {profile.bio ? (
-              <div className="profile-bio">{profile.bio}</div>
-            ) : null}
+          {profile.bio ? (
+            <div className="profile-bio">{profile.bio}</div>
+          ) : null}
+          <br />
+          <div className="profile-posts">
+            <ProfilePosts />
           </div>
-          <div>POSTS</div>
         </div>
       );
     }
