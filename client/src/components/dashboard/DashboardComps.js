@@ -93,7 +93,7 @@ const DashboardComps = ({
   }
   return (
     <div>
-      <div className="center dashboard">
+      {/* <div className="center dashboard">
         {handleContent}
         {locationContent}
         {bioContent}
@@ -101,16 +101,15 @@ const DashboardComps = ({
         {youtubeContent}
         {instagramContent}
         {facebookContent}
-
-        <div>
+ </div>*/}
+      <div>
+        {" "}
+        <Link to="edit-profile">
           {" "}
-          <Link to="edit-profile">
-            {" "}
-            <Button style={{ margin: "2.5%" }} type="primary">
-              Edit your profile
-            </Button>
-          </Link>
-        </div>
+          <Button style={{ margin: "2.5%" }} type="primary">
+            Edit your profile
+          </Button>
+        </Link>
       </div>
     </div>
   );

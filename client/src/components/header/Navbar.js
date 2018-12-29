@@ -35,9 +35,9 @@ class Navbar extends Component {
             mode="horizontal"
             className="nav"
           >
-            <Menu.Item key="feed" className="navItem">
+            {/* <Menu.Item key="feed" className="navItem">
               <Link to="/feed"> Feed</Link>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="home" className="navItem">
               <Link to="/"> Home</Link>
             </Menu.Item>

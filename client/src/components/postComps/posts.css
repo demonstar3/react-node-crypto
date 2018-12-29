@@ -4,17 +4,48 @@
 }
 .post-text {
   font-size: 3em;
-  margin: 20px;
+  margin: 5%;
 }
 .post-title {
   font-size: 6em;
 }
+.delete-button {
+  float: right;
+  margin: 0% 5%;
+}
+.like-button {
+  font-size: 2em;
+  margin: 0 5%;
+}
+.like-num {
+  margin: 0 2.5%;
+  font-size: 1em;
+}
+.error-like {
+  margin: 0 2.5%;
+  font-size: 1em;
+}
+.post-button {
+  margin: 0%;
+}
+
+.indi-comment {
+  margin: 20px;
+  font-size: 1em;
+}
+.comment-username {
+  font-weight: bold;
+  margin: 1% 0%;
+}
+
 @media only screen and (max-width: 600px) {
   .post-title {
     font-size: 3em;
   }
   .post-text {
-    font-size: 1.5em;
-    margin: 5px;
+    font-size: 2em;
+  }
+  .delete-button {
+    top: 10px;
   }
 }

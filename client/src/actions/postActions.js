@@ -4,7 +4,8 @@ import {
   GET_POST,
   ADD_POST,
   DELETE_POST,
-  POST_LOADING
+  POST_LOADING,
+  CLEAR_ERRORS
 } from "./types";
 import axios from "axios";
 
@@ -21,7 +22,10 @@ export const addPost = (postData, history) => dispatch => {
     )
 
     .catch(err => {
-      console.log(err);
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
     });
 };
 
@@ -68,6 +72,18 @@ export const deletePost = (id, history) => dispatch => {
     });
 };
 
+export const editPost = (postData, id, history) => dispatch => {
+  axios
+    .post(`/api/post/${id}`, postData)
+    .then(history.push(`/post/${id}`))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
@@ -84,4 +100,62 @@ export const getPost = id => dispatch => {
         payload: null
       });
     });
+};
+
+export const addLike = id => dispatch => {
+  axios
+    .post(`/api/post/like/${id}`)
+
+    .then(res => dispatch(getPost(id)))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const removeLike = id => dispatch => {
+  axios
+    .post(`/api/post/unlike/${id}`)
+
+    .then(dispatch(getPost(id)))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const addComment = (commentData, postId) => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post(`/api/post/comment/${postId}`, commentData)
+    .then(res => dispatch(getPost(postId)))
+
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+export const deleteComment = (postId, commentId) => dispatch => {
+  axios
+    .delete(`/api/post/comment/${postId}/${commentId}`)
+    .then(res => dispatch(getPost(postId)))
+
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
 };

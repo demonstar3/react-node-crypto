@@ -45,18 +45,7 @@ class Dashboard extends Component {
             />
           </div>
         );
-      } else {
-        content = (
-          <div>
-            {" "}
-            <Link to="create-profile">
-              {" "}
-              <Button type="primary">Make a profile</Button>
-            </Link>
-          </div>
-        );
       }
-      //   content = <div>Content</div>;
     }
     return (
       <div>
