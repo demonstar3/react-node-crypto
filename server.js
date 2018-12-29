@@ -28,10 +28,6 @@ mongoose
   })
   .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-  res.send("HELLO");
-});
-
 app.use("/api/users", users);
 app.use("/api/profile", profiles);
 app.use("/api/post", posts);
