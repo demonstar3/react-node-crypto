@@ -116,7 +116,14 @@ class Post extends Component {
         buttons = (
           <span className="delete-button">
             <Link to={`/edit-post/${post._id}`}>
-              <Button className="post-button" type="default">
+              <Button
+                disabled={false}
+                className="post-button"
+                onClick={() => {
+                  console.log("hello");
+                }}
+                type="default"
+              >
                 Edit
               </Button>
             </Link>
@@ -126,6 +133,13 @@ class Post extends Component {
               type="danger"
             >
               Delete
+            </Button>
+            <Button
+              onClick={() => {
+                console.log("2");
+              }}
+            >
+              Hello
             </Button>
           </span>
         );
