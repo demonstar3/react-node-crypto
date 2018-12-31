@@ -29,7 +29,7 @@
 .leftBar {
   position: fixed;
   left: 0;
-  margin: 0 0% 0% 5%;
+  margin: 0 0% 0% 1.5%;
   padding: 15% 0%;
   top: 0;
   float: left;
@@ -45,7 +45,7 @@
 .rightBar {
   position: fixed;
   right: 0;
-  margin: 0 5% 0% 0%;
+  margin: 0 1.5% 0% 0%;
   padding: 15% 0%;
   top: 0;
   overflow-x: hidden;
@@ -71,7 +71,7 @@
   .leftBar {
     position: fixed;
     left: 0;
-    margin: 0 0% 0% 5%;
+    margin: 0 0% 0% 1.5%;
 
     padding: 40% 0%;
     top: 0;
@@ -80,7 +80,7 @@
   .rightBar {
     position: fixed;
     right: 0;
-    margin: 0 5% 0% 0%;
+    margin: 0 1.5% 0% 0%;
     padding: 40% 0%;
     top: 0;
     overflow-x: hidden;
