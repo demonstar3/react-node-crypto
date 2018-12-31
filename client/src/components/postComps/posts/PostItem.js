@@ -9,6 +9,17 @@ import { deletePost } from "../../../actions/postActions";
 class PostItem extends Component {
   render() {
     const { post } = this.props;
+    let postText;
+    if (post.text.length >= 200) {
+      postText = (
+        <div className="post-feed-item-text">
+          {post.text.substring(0, 200)}
+          <Link to={`/post/${post._id}`}> ...Read More!</Link>
+        </div>
+      );
+    } else {
+      postText = <div className="post-feed-item-text">{post.text}</div>;
+    }
     return (
       <div>
         {" "}
@@ -17,7 +28,8 @@ class PostItem extends Component {
           className="posts-item"
           extra={<Link to={`/post/${post._id}`}>More</Link>}
         >
-          {post.text}
+          {console.log(post.text.length)}
+          <div>{postText}</div>
         </Card>
       </div>
     );
