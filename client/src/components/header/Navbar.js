@@ -11,7 +11,6 @@ class Navbar extends Component {
     current: ""
   };
   handleClick = e => {
-    console.log("click ", e);
     this.setState({
       current: e.key
     });

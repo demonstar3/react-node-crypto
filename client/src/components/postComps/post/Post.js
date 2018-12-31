@@ -35,7 +35,6 @@ class Post extends Component {
     const { auth } = this.props;
     for (var i = post.likes.length - 1; i >= 0; i--) {
       if (post.likes[i].user === auth.user.id) {
-        // console.log("activated");
         return false;
       }
     }
@@ -49,7 +48,6 @@ class Post extends Component {
     if (!auth.isAuthenticated) {
       this.setState({ errors: "You must login to like a post" });
     } else {
-      console.log("activated");
       if (this.checkLikes()) {
         this.props.addLike(post._id);
         apple++;
@@ -116,14 +114,7 @@ class Post extends Component {
         buttons = (
           <span className="delete-button">
             <Link to={`/edit-post/${post._id}`}>
-              <Button
-                disabled={false}
-                className="post-button"
-                onClick={() => {
-                  console.log("hello");
-                }}
-                type="default"
-              >
+              <Button disabled={false} className="post-button" type="default">
                 Edit
               </Button>
             </Link>
@@ -133,13 +124,6 @@ class Post extends Component {
               type="danger"
             >
               Delete
-            </Button>
-            <Button
-              onClick={() => {
-                console.log("2");
-              }}
-            >
-              Hello
             </Button>
           </span>
         );
