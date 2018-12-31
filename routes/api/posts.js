@@ -34,33 +34,31 @@ router.post(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(post => {
-      Post.findById(req.params.id)
-        .then(post => {
-          const { errors, isValid } = validatePostInput(req.body);
-          if (!isValid) {
-            return res.status(400).json(errors);
-          }
-          const newPost = {
-            text: req.body.text,
-            title: req.body.title
-          };
-          if (post.user.toString() !== req.user.id) {
-            return res
-              .status(401)
-              .json({ notauthorized: "User not authorized" });
-          }
+    Post.findById(req.params.id)
+      .then(post => {
+        const { errors, isValid } = validatePostInput(req.body);
+        if (!isValid) {
+          return res.status(400).json(errors);
+        }
+        const newPost = {
+          text: req.body.text,
+          title: req.body.title
+        };
 
-          Post.findOneAndUpdate(
-            { user: req.user.id },
-            { $set: newPost },
-            { new: true }
-          ).then(post => res.json(post));
-        })
-        .catch(err =>
-          res.status(404).json({ postnotfound: "Post cannot be found" })
-        );
-    });
+        if (post.user.toString() !== req.user.id) {
+          return res.status(401).json({ notauthorized: "User not authorized" });
+        }
+
+        Post.findOneAndUpdate(
+          { _id: post._id },
+          { $set: newPost },
+          { new: true }
+        ).then(post => res.json(post));
+        console.log(post);
+      })
+      .catch(err =>
+        res.status(404).json({ postnotfound: "Post cannot be found" })
+      );
   }
 );
 

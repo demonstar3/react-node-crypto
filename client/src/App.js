@@ -24,7 +24,8 @@ import PostForm from "./components/postComps/create-edit-post/PostForm";
 import EditPost from "./components/postComps/create-edit-post/EditPost";
 import Feed from "./components/feed/Feed";
 import Post from "./components/postComps/post/Post";
-
+import LeftBar from "./components/header/LeftBar";
+import RightBar from "./components/header/RightBar";
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
@@ -50,33 +51,42 @@ class App extends Component {
             {" "}
             <div className="content">
               <Header />
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={LoginForm} />
-                <Route exact path="/profiles" component={ProfilesPage} />
-                <Route exact path="/profile/:handle" component={Profile} />
-                <Route exact path="/profile/:handle" component={Profile} />
-                <Route exact path="/post/:id" component={Post} />
+              <LeftBar />
 
-                <PrivateRoute exact path="/make-a-post" component={PostForm} />
-                <PrivateRoute
-                  exact
-                  path="/edit-post/:id"
-                  component={EditPost}
-                />
+              <div className="body">
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={LoginForm} />
+                  <Route exact path="/profiles" component={ProfilesPage} />
+                  <Route exact path="/profile/:handle" component={Profile} />
+                  <Route exact path="/profile/:handle" component={Profile} />
+                  <Route exact path="/post/:id" component={Post} />
 
-                <PrivateRoute exact path="/feed" component={Feed} />
+                  <PrivateRoute
+                    exact
+                    path="/make-a-post"
+                    component={PostForm}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/edit-post/:id"
+                    component={EditPost}
+                  />
 
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                  <PrivateRoute exact path="/feed" component={Feed} />
 
-                <PrivateRoute
-                  exact
-                  path="/edit-profile"
-                  component={EditProfile}
-                />
-                <Route component={NotFound} />
-              </Switch>
+                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+
+                  <PrivateRoute
+                    exact
+                    path="/edit-profile"
+                    component={EditProfile}
+                  />
+                  <Route component={NotFound} />
+                </Switch>
+              </div>
+              <RightBar />
             </div>
             <PageFooter />
           </div>

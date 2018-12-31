@@ -45,9 +45,13 @@ class Home extends Component {
         </div>
       );
     } else {
-      console.log(posts[0]);
       carousel = (
         <div>
+          <img
+            src={require("../../images/crypto_rollerCoaster.gif")}
+            className="gif center"
+          />
+          <h3 className="carouselTitle">This Week's Top Posts</h3>
           <Carousel autoplay className="carousel">
             {" "}
             <div className="carouselItem">{posts[0].title}</div>
@@ -61,12 +65,7 @@ class Home extends Component {
         </div>
       );
     }
-    return (
-      <div className="Home">
-        <h3 className="carouselTitle">This Week's Top Posts</h3>
-        {carousel}
-      </div>
-    );
+    return <div className="Home">{carousel}</div>;
   }
 }
 
