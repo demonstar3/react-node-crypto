@@ -27,13 +27,12 @@ class Dashboard extends Component {
       );
     } else {
       if (Object.keys(profile).length > 0) {
-        const { handle, location, bio } = this.props.profile.profile;
+        const { location, bio } = this.props.profile.profile;
         const { twitter, youtube, facebook, instagram } =
           this.props.profile.profile.social || {};
         content = (
           <div className="center dashboard">
             <DashboardComps
-              handle={handle}
               location={location}
               bio={bio}
               twitter={twitter}

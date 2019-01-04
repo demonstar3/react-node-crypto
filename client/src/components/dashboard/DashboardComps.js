@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Button } from "antd";
 import isEmpty from "../../validation/is-empty";
+import ProfilePosts from "../profileComps/profile/ProfilePosts";
 
 const DashboardComps = ({
   bio,
   location,
-  handle,
   twitter,
   youtube,
   instagram,
@@ -15,7 +15,6 @@ const DashboardComps = ({
 }) => {
   let bioContent;
   let locationContent;
-  let handleContent;
   let twitterContent;
   let youtubeContent;
   let facebookContent;
@@ -23,7 +22,7 @@ const DashboardComps = ({
   if (isEmpty(bio) === false) {
     bioContent = (
       <div className="dashboardSection">
-        Here's your bio :
+        Bio :
         <br />
         {bio}
       </div>
@@ -38,18 +37,7 @@ const DashboardComps = ({
       </div>
     );
   }
-  if (isEmpty(handle) === false) {
-    let link = `/profile/${handle}`;
-    handleContent = (
-      <div className="dashboardSection">
-        Your profile Handle:
-        <br />
-        <Link to={link}>http://localhost:3000/profile/{handle}</Link>
-        <br />
-        Share this link to expand your profile reach!
-      </div>
-    );
-  }
+
   if (isEmpty(twitter) === false) {
     twitterContent = (
       <div className="dashboardSection">
@@ -93,23 +81,25 @@ const DashboardComps = ({
   }
   return (
     <div>
-      {/* <div className="center dashboard">
-        {handleContent}
+      <div className="center dashboard">
         {locationContent}
         {bioContent}
-        {twitterContent}
+        {/* {twitterContent}
         {youtubeContent}
         {instagramContent}
-        {facebookContent}
- </div>*/}
+        {facebookContent} */}
+      </div>
+
+      <Link to="edit-profile">
+        <Button style={{ margin: "2.5%" }} type="primary">
+          Edit your profile
+        </Button>
+      </Link>
       <div>
-        {" "}
-        <Link to="edit-profile">
-          {" "}
-          <Button style={{ margin: "2.5%" }} type="primary">
-            Edit your profile
-          </Button>
-        </Link>
+        <h4 className="dashboard-posts-title">Posts</h4>
+        <div className="dashboard-posts">
+          <ProfilePosts />
+        </div>
       </div>
     </div>
   );

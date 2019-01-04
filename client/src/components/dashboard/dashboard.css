@@ -7,3 +7,10 @@
 .title {
   font-size: 4em;
 }
+.dashboard-posts-title {
+  font-size: 1.5em;
+  text-align: center;
+}
+.dashboard-posts {
+  text-align: left;
+}
