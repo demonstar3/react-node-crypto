@@ -79,6 +79,7 @@ const DashboardComps = ({
       </div>
     );
   }
+
   return (
     <div>
       <div className="center dashboard">
@@ -91,7 +92,7 @@ const DashboardComps = ({
       </div>
 
       <Link to="edit-profile">
-        <Button style={{ margin: "2.5%" }} type="primary">
+        <Button style={{ margin: "2.5%" }} type="primary" size="large">
           Edit your profile
         </Button>
       </Link>
