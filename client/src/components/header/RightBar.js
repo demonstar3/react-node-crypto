@@ -7,6 +7,7 @@ export default function RightBar() {
         <img
           className="rightBarImg"
           src={require("../../images/crpyotNetcol2.png")}
+          alt="A coloumn of cryptocurrencies including Bitcoin, Cardano, Stellar, and Monero "
         />
       </div>
     </div>

@@ -7,9 +7,8 @@ export default function SocialMedia({ twitter, instagram, facebook, youtube }) {
     <span>
       {facebook ? (
         <span className="social-icon">
-          <Icon type="facebook" />
           {/* prettier-ignore */}
-          <a target={"_blank"} href={facebook}><span className='ignore'>If you're seeing this, it's just dummy text</span></a>
+          <a target={"_blank"} href={facebook}><span > <Icon type="facebook" /></span></a>
           <br />
         </span>
       ) : /* prettier-ignore */
@@ -17,9 +16,8 @@ export default function SocialMedia({ twitter, instagram, facebook, youtube }) {
 
       {instagram ? (
         <span className="social-icon">
-          <Icon type="instagram" />
           {/* prettier-ignore */}
-          <a target={"_blank"} href={instagram}><span className='ignore'>If you're seeing this, it's just dummy text</span></a>
+          <a target={"_blank"} href={instagram}><span ><Icon type="instagram" /></span></a>
           <br />
         </span>
       ) : /* prettier-ignore */
@@ -27,9 +25,8 @@ export default function SocialMedia({ twitter, instagram, facebook, youtube }) {
 
       {youtube ? (
         <span className="social-icon">
-          <Icon type="youtube" />
           {/* prettier-ignore */}
-          <a target={"_blank"} href={youtube}><span className='ignore'>If you're seeing this, it's just dummy text</span></a>
+          <a target={"_blank"} href={youtube}><span > <Icon type="youtube" /></span></a>
           <br />
         </span>
       ) : /* prettier-ignore */
@@ -37,9 +34,8 @@ export default function SocialMedia({ twitter, instagram, facebook, youtube }) {
 
       {twitter ? (
         <span className="social-icon">
-          <Icon type="twitter" />
           {/* prettier-ignore */}
-          <a target={"_blank"} href={twitter}><span className='ignore'>If you're seeing this, it's just dummy text</span></a>
+          <a target={"_blank"} href={twitter}><span ><Icon type="twitter" /></span></a>
         </span>
       ) : /* prettier-ignore */
       null}

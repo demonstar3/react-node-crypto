@@ -19,8 +19,9 @@ class ProfileGetPost extends Component {
     // const { post, loading } = this.props.post;
     const { post } = this.state;
     let postContent;
+    let postText;
 
-    if (post === null || post === {}) {
+    if (post === null || post === {} || post.text === undefined) {
       postContent = (
         <div style={{ textAlign: "center" }}>
           <Icon style={{ height: "100px", width: "100px" }} type="loading" />
@@ -32,15 +33,27 @@ class ProfileGetPost extends Component {
         </div>
       );
     } else {
+      if (post.text.length >= 100) {
+        postText = (
+          <div className="post-feed-item-text">
+            {post.text.substring(0, 200)}
+            <span className="read-more"> ...Read More!</span>
+          </div>
+        );
+      } else {
+        postText = <div className="post-feed-item-text">{post.text}</div>;
+      }
       postContent = (
         <div>
-          {" "}
           <Card
-            title={post.title}
+            title={
+              <Link className="post-feed-title" to={`/post/${post._id}`}>
+                {post.title}
+              </Link>
+            }
             className="posts-item"
-            extra={<Link to={`/post/${post._id}`}>More</Link>}
           >
-            {post.text}
+            <Link to={`/post/${post._id}`}>{postText}</Link>
           </Card>
         </div>
       );

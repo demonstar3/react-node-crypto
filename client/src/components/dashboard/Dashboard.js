@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProfile } from "../../actions/profileActions";
 import PropTypes from "prop-types";
-import { Icon, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Icon } from "antd";
 import DashboardComps from "./DashboardComps";
 import "./dashboard.css";
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getProfile();
-    console.log("hello");
   }
   render() {
     let content;

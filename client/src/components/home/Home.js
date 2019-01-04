@@ -4,7 +4,6 @@ import "./homepage.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getPosts } from "../../actions/postActions";
-import PostFeed from "../postComps/posts/PostFeed";
 import { Link } from "react-router-dom";
 class Home extends Component {
   componentDidMount() {
@@ -16,22 +15,34 @@ class Home extends Component {
     const { posts, loading } = this.props.post;
     if (this.props.auth.isAuthenticated) {
       createPost = (
-        <div className=" center">
+        <div className="center">
           {" "}
-          <Link to={"make-a-post"}>
+          <Link to={"/make-a-post"}>
             <Button className=" block-button" type="primary" block>
               Make A Post
+            </Button>
+          </Link>
+          <br /> <br />
+          <Link to={"/posts"}>
+            <Button className=" block-button" type="primary" block>
+              Read Some Posts!
             </Button>
           </Link>
         </div>
       );
     } else {
       createPost = (
-        <div className=" center">
+        <div className="center">
           {" "}
           <Link to={"register"}>
             <Button className=" block-button" block type="primary">
               Sign Up
+            </Button>
+          </Link>
+          <br /> <br />
+          <Link to={"/posts"}>
+            <Button className=" block-button" type="primary" block>
+              Read Some Posts!
             </Button>
           </Link>
         </div>
@@ -50,7 +61,16 @@ class Home extends Component {
           <img
             src={require("../../images/crypto_rollerCoaster.gif")}
             className="gif center"
+            alt="Bitcoin Rollercoaster Gif"
           />
+
+          <div className="about">
+            <h1 className="center">Welcome!</h1>
+            Welcome to Crypto-Net. Crypto-net is a social website for everything
+            crypto related. It's a place for crpyto fanatics to discuss
+            everything from margin trading on bitmex to finding altcoin gems.
+            Sign up below to get started and make your first post!{" "}
+          </div>
           <h3 className="carouselTitle">This Week's Top Posts</h3>
           <Carousel autoplay className="carousel">
             {" "}
@@ -61,7 +81,8 @@ class Home extends Component {
           </Carousel>
           <br />
           {createPost}
-          <PostFeed posts={posts} />
+
+          <br />
         </div>
       );
     }

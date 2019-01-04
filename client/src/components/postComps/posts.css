@@ -1,5 +1,5 @@
 .posts-item {
-  margin: 70px auto;
+  margin: 4% auto;
   width: 70%;
 }
 .post-text {
@@ -9,6 +9,12 @@
 }
 .post-title {
   font-size: 6em;
+}
+.post-username {
+  text-align: right;
+  margin: 2% 10%;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 .delete-button {
   float: right;
@@ -35,14 +41,19 @@
   font-size: 1em;
 }
 .comment-username {
-  font-weight: bold;
   margin: 1% 0%;
 }
 
 .post-feed-item-text {
   white-space: pre-line;
+  color: rgba(0, 0, 0, 0.65);
 }
-
+.post-feed-title {
+  color: rgba(0, 0, 0, 0.65);
+}
+.read-more {
+  color: #1890ff;
+}
 @media only screen and (max-width: 600px) {
   .post-title {
     font-size: 3em;

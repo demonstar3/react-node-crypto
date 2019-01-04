@@ -19,7 +19,6 @@ class Post extends Component {
     super(props);
     this.state = {
       errors: "",
-      likes: 0,
       alreadyLiked: false
     };
   }
@@ -50,11 +49,11 @@ class Post extends Component {
     } else {
       if (this.checkLikes()) {
         this.props.addLike(post._id);
-        apple++;
+
         this.setState({ likes: apple });
       } else {
         this.props.removeLike(post._id);
-        apple--;
+
         this.setState({ likes: apple });
       }
     }
@@ -131,6 +130,9 @@ class Post extends Component {
       postContent = (
         <div>
           <h1 className="center post-title">{post.title}</h1>
+          <div className="post-username">
+            <Link to={`/profile/${post.username}`}>By:{post.username}</Link>
+          </div>
           <br />
           <p className="post-text">{post.text}</p>
           <Divider />

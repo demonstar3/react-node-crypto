@@ -14,7 +14,7 @@ class PostItem extends Component {
       postText = (
         <div className="post-feed-item-text">
           {post.text.substring(0, 200)}
-          <Link to={`/post/${post._id}`}> ...Read More!</Link>
+          <span className="read-more">...Read More!</span>
         </div>
       );
     } else {
@@ -24,12 +24,18 @@ class PostItem extends Component {
       <div>
         {" "}
         <Card
-          title={post.title}
+          title={
+            <Link className="post-feed-title" to={`/post/${post._id}`}>
+              {post.title}
+            </Link>
+          }
           className="posts-item"
-          extra={<Link to={`/post/${post._id}`}>More</Link>}
+          extra={<Link to={`/profile/${post.username}`}>{post.username}</Link>}
         >
-          {console.log(post.text.length)}
-          <div>{postText}</div>
+          {" "}
+          <Link to={`/post/${post._id}`}>
+            <div>{postText}</div>
+          </Link>
         </Card>
       </div>
     );

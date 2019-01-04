@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearProfile } from "../../actions/profileActions";
 import { logoutUser } from "../../actions/authActions";
+import MediaQuery from "react-responsive";
+
 class Navbar extends Component {
   state = {
     current: ""
@@ -28,61 +30,129 @@ class Navbar extends Component {
     if (isAuthenticated) {
       links = (
         <div>
-          <Menu
-            onClick={this.handleClick}
-            selectedKeys={[this.state.current]}
-            mode="horizontal"
-            className="nav"
-          >
-            {/* <Menu.Item key="feed" className="navItem">
+          <MediaQuery query="(min-device-width: 700px)">
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+              mode="horizontal"
+              className="nav"
+            >
+              {/* <Menu.Item key="feed" className="navItem">
               <Link to="/feed"> Feed</Link>
             </Menu.Item> */}
-            <Menu.Item key="home" className="navItem">
-              <Link to="/"> Home</Link>
-            </Menu.Item>
-            <Menu.Item key="profile" className="navItem">
-              <Link to="/dashboard"> My Profile</Link>
-            </Menu.Item>
-            <Menu.Item key="profiles" className="navItem">
-              <Link to="/profiles"> Find a Creator</Link>
-            </Menu.Item>
+              <Menu.Item key="home" className="navItem">
+                <Link to="/"> Home</Link>
+              </Menu.Item>
+              <Menu.Item key="posts" className="navItem">
+                <Link to="/posts"> Posts</Link>
+              </Menu.Item>
+              <Menu.Item key="profile" className="navItem">
+                <Link to="/dashboard"> My Profile</Link>
+              </Menu.Item>
+              <Menu.Item key="profiles" className="navItem">
+                <Link to="/profiles"> Find a Creator</Link>
+              </Menu.Item>
 
-            <Menu.Item key="logout" className="navItem">
-              <Link to="/" onClick={this.onLogoutClick}>
+              <Menu.Item key="logout" className="navItem">
+                <Link to="/" onClick={this.onLogoutClick}>
+                  {" "}
+                  Logout
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="greeting" className="navItem greeting">
                 {" "}
-                Logout
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="greeting" className="navItem greeting">
-              {" "}
-              Hello {user.username}
-            </Menu.Item>
-          </Menu>
+                Hello {user.username}
+              </Menu.Item>
+            </Menu>
+          </MediaQuery>
+          <MediaQuery query="(max-device-width: 699px)">
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+              mode="inline"
+              className="nav"
+            >
+              <Menu.Item key="greeting"> Hello {user.username}</Menu.Item>
+              {/* <Menu.Item key="feed" className="navItem">
+              <Link to="/feed"> Feed</Link>
+            </Menu.Item> */}
+              <Menu.Item key="home" className="navItem">
+                <Link to="/"> Home</Link>
+              </Menu.Item>
+              <Menu.Item key="posts" className="navItem">
+                <Link to="/posts"> Posts</Link>
+              </Menu.Item>
+              <Menu.Item key="profile" className="navItem">
+                <Link to="/dashboard"> My Profile</Link>
+              </Menu.Item>
+              <Menu.Item key="profiles" className="navItem">
+                <Link to="/profiles"> Find a Creator</Link>
+              </Menu.Item>
+
+              <Menu.Item key="logout" className="navItem">
+                <Link to="/" onClick={this.onLogoutClick}>
+                  {" "}
+                  Logout
+                </Link>
+              </Menu.Item>
+            </Menu>
+          </MediaQuery>
         </div>
       );
     } else {
       links = (
         <div>
-          <Menu
-            onClick={this.handleClick}
-            selectedKeys={[this.state.current]}
-            mode="horizontal"
-            className="nav"
-          >
-            <Menu.Item key="home" className="navItem">
-              <Link to="/"> Home</Link>
-            </Menu.Item>
-            <Menu.Item key="login" className="navItem">
-              <Link to="/login"> Login</Link>
-            </Menu.Item>
-            <Menu.Item key="profiles" className="navItem">
-              <Link to="/profiles"> Find a Creator</Link>
-            </Menu.Item>
+          <MediaQuery query="(min-device-width: 700px)">
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+              mode="horizontal"
+              className="nav"
+            >
+              <Menu.Item key="home" className="navItem">
+                <Link to="/"> Home</Link>
+              </Menu.Item>
+              <Menu.Item key="posts" className="navItem">
+                <Link to="/posts"> Posts</Link>
+              </Menu.Item>
+              <Menu.Item key="login" className="navItem">
+                <Link to="/login"> Login</Link>
+              </Menu.Item>
+              <Menu.Item key="profiles" className="navItem">
+                <Link to="/profiles"> Find a Creator</Link>
+              </Menu.Item>
 
-            <Menu.Item key="signup" className="navItem ">
-              <Link to="/register"> Sign Up</Link>
-            </Menu.Item>
-          </Menu>
+              <Menu.Item key="signup" className="navItem ">
+                <Link to="/register"> Sign Up</Link>
+              </Menu.Item>
+            </Menu>
+          </MediaQuery>
+          <MediaQuery query="(max-device-width: 699px)">
+            {" "}
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+              mode="inline"
+              className="nav"
+            >
+              <Menu.Item key="home" className="navItem">
+                <Link to="/"> Home</Link>
+              </Menu.Item>
+              <Menu.Item key="posts" className="navItem">
+                <Link to="/posts"> Posts</Link>
+              </Menu.Item>
+              <Menu.Item key="login" className="navItem">
+                <Link to="/login"> Login</Link>
+              </Menu.Item>
+              <Menu.Item key="profiles" className="navItem">
+                <Link to="/profiles"> Find a Creator</Link>
+              </Menu.Item>
+
+              <Menu.Item key="signup" className="navItem ">
+                <Link to="/register"> Sign Up</Link>
+              </Menu.Item>
+            </Menu>
+          </MediaQuery>
         </div>
       );
     }

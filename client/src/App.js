@@ -26,6 +26,7 @@ import Feed from "./components/feed/Feed";
 import Post from "./components/postComps/post/Post";
 import LeftBar from "./components/header/LeftBar";
 import RightBar from "./components/header/RightBar";
+import AllPosts from "./components/feed/AllPosts";
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
@@ -62,6 +63,7 @@ class App extends Component {
                   <Route exact path="/profile/:handle" component={Profile} />
                   <Route exact path="/profile/:handle" component={Profile} />
                   <Route exact path="/post/:id" component={Post} />
+                  <Route exact path="/posts" component={AllPosts} />
 
                   <PrivateRoute
                     exact
