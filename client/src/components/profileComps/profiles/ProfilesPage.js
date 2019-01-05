@@ -73,7 +73,7 @@ class ProfilesPage extends Component {
         <div className="center">
           {" "}
           <Search
-            placeholder="input search text"
+            placeholder="Search For Profiles!"
             onChange={this.onChange}
             onSearch={this.onSearch}
             enterButton

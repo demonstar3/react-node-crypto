@@ -82,7 +82,7 @@ class AllPosts extends Component {
           <div className="center">
             {" "}
             <Search
-              placeholder="input search text"
+              placeholder="Search For Posts!"
               onChange={this.onChange}
               onSearch={this.onSearch}
               enterButton
