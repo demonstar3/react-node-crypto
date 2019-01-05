@@ -18,7 +18,6 @@ class RegisterForm extends Component {
   }
   componentDidMount() {
     this.setState({ errors: {} });
-    console.log("hello");
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {

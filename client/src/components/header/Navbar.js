@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { clearProfile } from "../../actions/profileActions";
 import { logoutUser } from "../../actions/authActions";
 import MediaQuery from "react-responsive";
+import { withRouter } from "react-router-dom";
 
 class Navbar extends Component {
   state = {
@@ -21,7 +22,7 @@ class Navbar extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.clearProfile();
-    this.props.logoutUser();
+    this.props.logoutUser(this.props.history);
   };
 
   render() {
@@ -170,4 +171,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logoutUser, clearProfile }
-)(Navbar);
+)(withRouter(Navbar));

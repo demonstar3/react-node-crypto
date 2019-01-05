@@ -119,7 +119,7 @@ export const removeLike = id => dispatch => {
   axios
     .post(`/api/post/unlike/${id}`)
 
-    .then(dispatch(getPost(id)))
+    .then(res => dispatch(getPost(id)))
     .catch(err => {
       dispatch({
         type: GET_ERRORS,

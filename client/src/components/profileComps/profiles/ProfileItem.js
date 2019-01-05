@@ -12,7 +12,7 @@ export default class ProfileItem extends Component {
       <div>
         <Row>
           <Col span={24}>
-            <Card title={profile.username}>
+            <Card title={profile.username} className="profile-item">
               {profile.bio ? profile.bio : "No bio yet!"}
               <br />
               <Link to={`/profile/${profile.handle}`}>

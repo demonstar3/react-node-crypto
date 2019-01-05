@@ -1,20 +1,51 @@
 import React, { Component } from "react";
-import { Button, Icon } from "antd";
+import { Button, Icon, Input } from "antd";
 import "./feed.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getPosts } from "../../actions/postActions";
 import PostFeed from "../postComps/posts/PostFeed";
 import { Link } from "react-router-dom";
+const Search = Input.Search;
 
 class AllPosts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: []
+    };
+  }
   componentDidMount() {
     this.props.getPosts();
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ posts: nextProps.post.posts });
+  }
+  onChange = e => {
+    let filteredPosts;
+
+    filteredPosts = this.props.post.posts.filter(post => {
+      return (
+        post.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
+      );
+    });
+
+    this.setState({ posts: filteredPosts });
+  };
+  onSearch = e => {
+    let filteredPosts;
+
+    filteredPosts = this.props.post.posts.filter(post => {
+      return post.title.toLowerCase().indexOf(e.toLowerCase()) !== -1;
+    });
+
+    this.setState({ posts: filteredPosts });
+  };
   render() {
     let createPost;
     let allposts;
     const { posts, loading } = this.props.post;
+
     if (this.props.auth.isAuthenticated) {
       createPost = (
         <div className="center">
@@ -48,8 +79,18 @@ class AllPosts extends Component {
     } else {
       allposts = (
         <div>
+          <div className="center">
+            {" "}
+            <Search
+              placeholder="input search text"
+              onChange={this.onChange}
+              onSearch={this.onSearch}
+              enterButton
+              className="search-profiles"
+            />
+          </div>
           {createPost}
-          <PostFeed posts={posts} />
+          <PostFeed posts={this.state.posts} />
         </div>
       );
     }

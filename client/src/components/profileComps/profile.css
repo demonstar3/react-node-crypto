@@ -26,10 +26,17 @@
   margin: 0px 15px;
   width: auto;
 }
+.profile-item {
+  margin: 1% 0;
+}
 
 .profile-bio {
   margin: 20px 50px 0px 50px;
   font-size: 2em;
+}
+.search-profiles {
+  max-width: 80%;
+  margin: 5% 0;
 }
 
 /* .profile-posts {

@@ -43,18 +43,13 @@ class Post extends Component {
   onLikeClick = () => {
     const { post } = this.props.post;
     const { auth } = this.props;
-    let apple = this.state.likes;
     if (!auth.isAuthenticated) {
       this.setState({ errors: "You must login to like a post" });
     } else {
       if (this.checkLikes()) {
         this.props.addLike(post._id);
-
-        this.setState({ likes: apple });
       } else {
         this.props.removeLike(post._id);
-
-        this.setState({ likes: apple });
       }
     }
   };
