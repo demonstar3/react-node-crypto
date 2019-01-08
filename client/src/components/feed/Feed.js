@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Icon } from "antd";
 import { getPosts } from "../../actions/postActions";
 import PostFeed from "../postComps/posts/PostFeed";
+import GoogleAd from "../ads/GoogleAd";
 
 class Posts extends Component {
   componentDidMount() {
@@ -27,7 +28,12 @@ class Posts extends Component {
       const { posts } = this.props.post;
       postContent = <PostFeed posts={posts} />;
     }
-    return postContent;
+    return (
+      <div>
+        <GoogleAd />
+        {postContent}
+      </div>
+    );
   }
 }
 

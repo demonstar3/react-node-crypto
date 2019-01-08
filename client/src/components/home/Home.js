@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { getPosts } from "../../actions/postActions";
 import { Link } from "react-router-dom";
 // import { Helmet } from "react-helmet";
-import GoogleAd from "../ads/GoogleAd";
+
 class Home extends Component {
   componentDidMount() {
     this.props.getPosts();
@@ -88,12 +88,7 @@ class Home extends Component {
         </div>
       );
     }
-    return (
-      <div className="Home">
-        <GoogleAd />
-        {carousel}
-      </div>
-    );
+    return <div className="Home">{carousel}</div>;
   }
 }
 
