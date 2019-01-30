@@ -1,6 +1,7 @@
 import { Upload, Icon, Modal } from "antd";
+import React, { Component } from "react";
 
-class PicturesWall extends React.Component {
+export default class ImgUpload extends Component {
   state = {
     previewVisible: false,
     previewImage: "",

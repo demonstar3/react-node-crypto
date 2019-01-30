@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
-const aws = require("aws-sdk");
+//const aws = require("aws-sdk");
 
 //LOAD validation
 const validateProfileInput = require("../../validation/profile");
@@ -121,13 +121,13 @@ router.post(
     });
   }
 );
-aws.config.region = "eu-west-1";
+// aws.config.region = "eu-west-1";
 
-//IMAGE UPLOAD
-router.post(
-  "/img_upload",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {}
-);
+// //IMAGE UPLOAD
+// router.post(
+//   "/img_upload",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {}
+// );
 
 module.exports = router;

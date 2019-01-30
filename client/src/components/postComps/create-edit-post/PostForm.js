@@ -5,16 +5,20 @@ import TextAreaGroup from "../../common/TextAreaGroup";
 import TextField from "../../common/TextField";
 import { withRouter } from "react-router-dom";
 import { addPost } from "../../../actions/postActions";
-import { Form, Button } from "antd";
+import { Form, Button, Upload, Icon, Modal } from "antd";
 import "../posts.css";
 
+import ImgUpload from "../../img_upload/ImgUpload";
 class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: "",
       title: "",
-      errors: {}
+      errors: {},
+      previewVisible: false,
+      previewImage: "",
+      fileList: []
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -22,7 +26,16 @@ class PostForm extends Component {
       this.setState({ errors: nextProps.errors });
     }
   }
+  handleCancel = () => this.setState({ previewVisible: false });
 
+  handlePreview = file => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true
+    });
+  };
+
+  handleChange = ({ fileList }) => this.setState({ fileList });
   onChange = e => {
     this.setState({
       [e.target.id]: e.target.value
@@ -30,6 +43,7 @@ class PostForm extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
+    console.log(this.state.fileList);
     const { user } = this.props.auth;
     const postData = {
       text: this.state.text,
@@ -40,7 +54,13 @@ class PostForm extends Component {
     this.setState({ title: "", text: "" });
   };
   render() {
-    const { errors } = this.state;
+    const { errors, previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
     return (
       <div>
         <Form className="postForm">
@@ -70,6 +90,24 @@ class PostForm extends Component {
           >
             Submit
           </Button>
+          <div className="clearfix">
+            <Upload
+              action="//jsonplaceholder.typicode.com/posts/"
+              listType="picture-card"
+              fileList={fileList}
+              onPreview={this.handlePreview}
+              onChange={this.handleChange}
+            >
+              {fileList.length >= 3 ? null : uploadButton}
+            </Upload>
+            <Modal
+              visible={previewVisible}
+              footer={null}
+              onCancel={this.handleCancel}
+            >
+              <img alt="example" style={{ width: "100%" }} src={previewImage} />
+            </Modal>
+          </div>
         </Form>
       </div>
     );
