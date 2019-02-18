@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaGroup from "../../common/TextAreaGroup";
+import axios from "axios";
 import TextField from "../../common/TextField";
 import { withRouter } from "react-router-dom";
 import { addPost } from "../../../actions/postActions";
 import { Form, Button, Upload, Icon, Modal } from "antd";
 import "../posts.css";
-
 import ImgUpload from "../../img_upload/ImgUpload";
 class PostForm extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class PostForm extends Component {
     });
   };
 
-  handleChange = ({ fileList }) => this.setState({ fileList });
+  onChangeImage = e => this.setState({ image: e.target.files[0] });
   onChange = e => {
     this.setState({
       [e.target.id]: e.target.value
@@ -43,7 +43,6 @@ class PostForm extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state.fileList);
     const { user } = this.props.auth;
     const postData = {
       text: this.state.text,
@@ -53,14 +52,25 @@ class PostForm extends Component {
     this.props.addPost(postData, this.props.history);
     this.setState({ title: "", text: "" });
   };
+  onSubmitImage = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const file = this.state.image;
+    console.log(file);
+    formData.append("image", file);
+    axios({
+      method: "post",
+      url: "api/profile/img_upload",
+      data: formData
+    }).then(res => {
+      console.log(res.data);
+    });
+  };
+
   render() {
-    const { errors, previewVisible, previewImage, fileList } = this.state;
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    );
+    const { errors } = this.state;
+
     return (
       <div>
         <Form className="postForm">
@@ -90,23 +100,19 @@ class PostForm extends Component {
           >
             Submit
           </Button>
+          <input
+            type="file"
+            name="selectedFile"
+            onChange={this.onChangeImage}
+          />
           <div className="clearfix">
-            <Upload
-              action="//jsonplaceholder.typicode.com/posts/"
-              listType="picture-card"
-              fileList={fileList}
-              onPreview={this.handlePreview}
-              onChange={this.handleChange}
+            <Button
+              className="center button"
+              type="primary"
+              onClick={this.onSubmitImage}
             >
-              {fileList.length >= 3 ? null : uploadButton}
-            </Upload>
-            <Modal
-              visible={previewVisible}
-              footer={null}
-              onCancel={this.handleCancel}
-            >
-              <img alt="example" style={{ width: "100%" }} src={previewImage} />
-            </Modal>
+              Image
+            </Button>
           </div>
         </Form>
       </div>

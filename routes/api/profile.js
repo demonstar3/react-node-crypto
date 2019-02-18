@@ -2,12 +2,9 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
-//const aws = require("aws-sdk");
-
+const methods = require("../../image_upload/image_upload");
 //LOAD validation
 const validateProfileInput = require("../../validation/profile");
-
-const S3_BUCKET = "crypto-net";
 //Models
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
@@ -121,13 +118,26 @@ router.post(
     });
   }
 );
-// aws.config.region = "eu-west-1";
+const multer = require("multer");
+const upload = multer({
+  storage: methods.storage,
+  limits: { fileSize: 1000000 },
+  fileFilter: function(req, file, cb) {
+    methods.checkFileType(file, cb);
+  }
+});
 
-// //IMAGE UPLOAD
-// router.post(
-//   "/img_upload",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {}
-// );
+router.post(
+  "/img_upload",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  (req, res, err) => {
+    if (req.file == undefined) {
+      res.status(404).json({ error: "no file selected" });
+    } else {
+      res.json({ fileLoc: req.file.location });
+    }
+  }
+);
 
 module.exports = router;
