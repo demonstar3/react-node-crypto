@@ -44,12 +44,15 @@ class PostForm extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { user } = this.props.auth;
-    const postData = {
+    let postData = {};
+    postData = {
       text: this.state.text,
       username: user.username,
       title: this.state.title
     };
-    this.props.addPost(postData, this.props.history);
+
+    console.log(postData);
+    this.props.addPost(postData, this.props.history, this.state.image);
     this.setState({ title: "", text: "" });
   };
   onSubmitImage = e => {
@@ -63,9 +66,11 @@ class PostForm extends Component {
       method: "post",
       url: "api/profile/img_upload",
       data: formData
-    }).then(res => {
-      console.log(res.data);
-    });
+    })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err.response.data));
   };
 
   render() {

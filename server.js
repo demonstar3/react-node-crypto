@@ -9,7 +9,7 @@ const path = require("path");
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const db = require("./config/keys").mongoURI;
@@ -19,10 +19,7 @@ app.use(passport.initialize());
 require("./config/passport.js")(passport);
 
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
+  .connect(db, { useNewUrlParser: true })
   .then(() => {
     console.log("MongoDB connected");
   })

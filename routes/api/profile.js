@@ -132,11 +132,14 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   upload.single("image"),
   (req, res, err) => {
-    if (req.file == undefined) {
-      res.status(404).json({ error: "no file selected" });
-    } else {
-      res.json({ fileLoc: req.file.location });
-    }
+    upload(req, res, err => {
+      if (err) {
+        return res.status(400).json({ error: err });
+      } else {
+        fileLoc = req.file.location;
+        return res.status(200).json({ sucess: fileLoc });
+      }
+    });
   }
 );
 

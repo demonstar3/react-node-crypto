@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const Post = require("../../models/Post");
 const Profile = require("../../models/Profile");
+const multer = require("multer");
+const methods = require("../../image_upload/image_upload");
 //validation
 
 const validatePostInput = require("../../validation/post");
@@ -63,6 +65,7 @@ router.post(
 );
 
 //ROUTE TO CREATE POST AT api/posts
+
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -93,6 +96,47 @@ router.post(
       .save()
       .then(post => res.json(post))
       .catch(err => console.log(err));
+  }
+);
+//route for image upload
+const upload = multer({
+  storage: methods.storage,
+  limits: { fileSize: 1000000 },
+  fileFilter: function(req, file, cb) {
+    methods.checkFileType(file, cb);
+  }
+});
+router.post(
+  "/image_upload/:id",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  (req, res) => {
+    let fileLoc;
+    if (req.file === undefined) {
+      return res
+        .status(404)
+        .json({ error: "Your must select an image to upload" });
+    } else {
+      fileLoc = req.file.location;
+    }
+    Post.findById(req.params.id)
+      .then(post => {
+        const newPost = {
+          image: fileLoc
+        };
+
+        if (post.user.toString() !== req.user.id) {
+          return res.status(401).json({ notauthorized: "User not authorized" });
+        }
+        Post.findOneAndUpdate(
+          { _id: post._id },
+          { $set: newPost },
+          { new: true }
+        ).then(post => res.json(post));
+      })
+      .catch(err =>
+        res.status(404).json({ postnotfound: "Post cannot be found" })
+      );
   }
 );
 

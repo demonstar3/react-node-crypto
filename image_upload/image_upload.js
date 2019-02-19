@@ -24,22 +24,12 @@ const storage = multerS3({
     cb(null, { fieldName: file.originalname });
   },
   key: function(req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
-
-// Init Upload
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1000000 },
-  fileFilter: function(req, file, cb) {
-    checkFileType(file, cb);
+    cb(null, `${req.user.id}_${file.originalname}`);
   }
 });
 
 // Check File Type
 function checkFileType(file, cb) {
-  console.log(`file: ${file}`);
   // Allowed ext
   const filetypes = /jpeg|jpg|png|gif/;
   // Check ext

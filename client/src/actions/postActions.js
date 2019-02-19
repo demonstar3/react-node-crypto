@@ -9,9 +9,47 @@ import {
 } from "./types";
 import axios from "axios";
 
-export const addPost = (postData, history) => dispatch => {
-  axios
-    .post("/api/post", postData)
+export const addPost = (postData, history, image) => dispatch => {
+  axios({
+    method: "post",
+    url: "/api/post",
+    data: postData
+  })
+    .then(
+      res => {
+        if (image) {
+          dispatch(addPostImage(image, history, res.data._id));
+        } else {
+          history.push(`/post/${res.data._id}`);
+        }
+      },
+      res => {
+        if (image) {
+          dispatch(addPostImage(image, history, res.data._id));
+        } else {
+          dispatch({
+            type: ADD_POST,
+            payload: res.data
+          });
+        }
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const addPostImage = (image, history, id) => dispatch => {
+  const formData = new FormData();
+  formData.append("image", image);
+  axios({
+    method: "post",
+    url: "/api/post/image_upload/" + id,
+    data: formData
+  })
     .then(
       res => history.push(`/post/${res.data._id}`),
       res =>
@@ -20,7 +58,6 @@ export const addPost = (postData, history) => dispatch => {
           payload: res.data
         })
     )
-
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
