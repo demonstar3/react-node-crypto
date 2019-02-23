@@ -9,6 +9,20 @@ import { addPost } from "../../../actions/postActions";
 import { Form, Button, Upload, Icon, Modal } from "antd";
 import "../posts.css";
 import ImgUpload from "../../img_upload/ImgUpload";
+const imageChecker = image => {
+  if (
+    image.size > 200000 ||
+    image.type !== "image/jpeg" ||
+    image.type !== "image/jpg" ||
+    image.type !== "image/gif" ||
+    image.type !== "image/png" ||
+    image.type !== "image/svg"
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+};
 class PostForm extends Component {
   constructor(props) {
     super(props);
@@ -35,12 +49,15 @@ class PostForm extends Component {
     });
   };
 
-  onChangeImage = e => this.setState({ image: e.target.files[0] });
+  onChangeImage = e => {
+    this.setState({ image: e.target.files[0] });
+  };
   onChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+
   onSubmit = e => {
     e.preventDefault();
     const { user } = this.props.auth;
@@ -50,28 +67,35 @@ class PostForm extends Component {
       username: user.username,
       title: this.state.title
     };
-
-    console.log(postData);
-    this.props.addPost(postData, this.props.history, this.state.image);
-    this.setState({ title: "", text: "" });
+    if (this.state.image !== undefined && !imageChecker(this.state.image)) {
+      this.setState({
+        errors: {
+          image:
+            "Your image is not valid. Please choose a smaller or valid image."
+        }
+      });
+    } else {
+      this.props.addPost(postData, this.props.history, this.state.image);
+      this.setState({ title: "", text: "" });
+    }
   };
-  onSubmitImage = e => {
-    e.preventDefault();
+  // onSubmitImage = e => {
+  //   e.preventDefault();
 
-    const formData = new FormData();
-    const file = this.state.image;
-    console.log(file);
-    formData.append("image", file);
-    axios({
-      method: "post",
-      url: "api/profile/img_upload",
-      data: formData
-    })
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => console.log(err.response.data));
-  };
+  //   const formData = new FormData();
+  //   const file = this.state.image;
+  //   console.log(file);
+  //   formData.append("image", file);
+  //   axios({
+  //     method: "post",
+  //     url: "api/profile/img_upload",
+  //     data: formData
+  //   })
+  //     .then(res => {
+  //       console.log(res.data);
+  //     })
+  //     .catch(err => console.log(err.response.data));
+  // };
 
   render() {
     const { errors } = this.state;
@@ -97,7 +121,16 @@ class PostForm extends Component {
             value={this.state.text}
             errors={errors.text ? errors.text : null}
           />
-
+          <div className="edit-image">
+            <input
+              type="file"
+              name="selectedFile"
+              onChange={this.onChangeImage}
+            />
+            {errors.image ? (
+              <span className="error">{errors.image}</span>
+            ) : null}
+          </div>
           <Button
             className="center button"
             type="primary"
@@ -105,20 +138,6 @@ class PostForm extends Component {
           >
             Submit
           </Button>
-          <input
-            type="file"
-            name="selectedFile"
-            onChange={this.onChangeImage}
-          />
-          <div className="clearfix">
-            <Button
-              className="center button"
-              type="primary"
-              onClick={this.onSubmitImage}
-            >
-              Image
-            </Button>
-          </div>
         </Form>
       </div>
     );

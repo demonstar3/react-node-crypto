@@ -41,7 +41,35 @@ export const addPost = (postData, history, image) => dispatch => {
       });
     });
 };
-
+export const editPost = (postData, id, image, history) => dispatch => {
+  axios
+    .post(`/api/post/${id}`, postData)
+    .then(
+      res => {
+        if (image) {
+          dispatch(addPostImage(image, history, res.data._id));
+        } else {
+          history.push(`/post/${res.data._id}`);
+        }
+      },
+      res => {
+        if (image) {
+          dispatch(addPostImage(image, history, res.data._id));
+        } else {
+          dispatch({
+            type: ADD_POST,
+            payload: res.data
+          });
+        }
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
 export const addPostImage = (image, history, id) => dispatch => {
   const formData = new FormData();
   formData.append("image", image);
@@ -93,7 +121,6 @@ export const setPostLoading = () => {
 export const deletePost = (id, history) => dispatch => {
   axios
     .delete(`/api/post/${id}`)
-
     .then(
       dispatch({
         type: DELETE_POST,
@@ -101,18 +128,6 @@ export const deletePost = (id, history) => dispatch => {
       }),
       history.push(`/`)
     )
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
-    });
-};
-
-export const editPost = (postData, id, history) => dispatch => {
-  axios
-    .post(`/api/post/${id}`, postData)
-    .then(history.push(`/post/${id}`))
     .catch(err => {
       dispatch({
         type: GET_ERRORS,

@@ -1,11 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const keys = require("../../config/keys");
 const passport = require("passport");
 const Post = require("../../models/Post");
 const Profile = require("../../models/Profile");
+const aws = require("aws-sdk");
 const multer = require("multer");
 const methods = require("../../image_upload/image_upload");
+aws.config.update({
+  // Your SECRET ACCESS KEY from AWS should go here,
+  // Never share it!
+  // Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
+  secretAccessKey: keys.SecretAccessKey,
+  // Not working key, Your ACCESS KEY ID from AWS should go here,
+  // Never share it!
+  // Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
+  accessKeyId: keys.AccessKeyID,
+  region: "us-east-2" // region of your bucket
+});
 //validation
 
 const validatePostInput = require("../../validation/post");
@@ -111,18 +124,20 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   upload.single("image"),
   (req, res) => {
-    let fileLoc;
+    let file = {};
     if (req.file === undefined) {
       return res
         .status(404)
         .json({ error: "Your must select an image to upload" });
     } else {
-      fileLoc = req.file.location;
+      file.fileLoc = req.file.location;
+      file.imageKey = req.file.key;
     }
     Post.findById(req.params.id)
       .then(post => {
         const newPost = {
-          image: fileLoc
+          image: file.fileLoc,
+          imageKey: file.imageKey
         };
 
         if (post.user.toString() !== req.user.id) {
@@ -141,6 +156,7 @@ router.post(
 );
 
 //ROUTE TO DELETE THE POST api/posts/:id
+
 router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
@@ -162,7 +178,16 @@ router.delete(
               }
             }
             profile.save().catch(err => console.log(`uhoh : ${err}`));
-            // .catch(err => console.log(err));
+          });
+          var paramsss = {
+            Bucket: "crypto-net",
+            Key: post.imageKey.toString()
+          };
+          var s3 = new aws.S3();
+          s3.deleteObject(paramsss, function(err, data) {
+            if (err) {
+              console.log(err);
+            }
           });
           post.remove().then(() => res.json({ sucess: true }));
         })

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Icon, Divider, Button } from "antd";
+import { Icon, Divider, Button, Modal } from "antd";
 import {
   getPost,
   deletePost,
@@ -19,7 +19,8 @@ class Post extends Component {
     super(props);
     this.state = {
       errors: "",
-      alreadyLiked: false
+      alreadyLiked: false,
+      previewVisible: false
     };
   }
   componentDidMount() {
@@ -53,6 +54,13 @@ class Post extends Component {
       }
     }
   };
+  previewImage = () => {
+    this.setState({ previewVisible: true });
+  };
+  handleCancel = () => {
+    this.setState({ previewVisible: false });
+  };
+
   render() {
     const { post, loading } = this.props.post;
     const { auth } = this.props;
@@ -128,6 +136,17 @@ class Post extends Component {
           <div className="post-username">
             <Link to={`/profile/${post.username}`}>By:{post.username}</Link>
           </div>
+          {post.image ? (
+            <div style={{ textAlign: "center" }}>
+              <img
+                src={post.image}
+                alt="associated with post"
+                className="post-image"
+                onClick={this.previewImage}
+              />
+              <span>Click image to expand</span>
+            </div>
+          ) : null}
           <br />
           <p className="post-text">{post.text}</p>
           <Divider />
@@ -138,6 +157,16 @@ class Post extends Component {
           <Divider />
           {comments}
           {commentForm}
+          {post.image ? (
+            <Modal
+              visible={this.state.previewVisible}
+              footer={null}
+              onCancel={this.handleCancel}
+              width={1000}
+            >
+              <img alt="post" style={{ width: "100%" }} src={post.image} />
+            </Modal>
+          ) : null}
         </div>
       );
     }

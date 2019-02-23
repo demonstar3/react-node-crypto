@@ -7,7 +7,20 @@ import { withRouter } from "react-router-dom";
 import { editPost, getPost } from "../../../actions/postActions";
 import { Form, Button, Icon } from "antd";
 import "../posts.css";
-
+const imageChecker = image => {
+  if (
+    image.size > 200000 ||
+    image.type !== "image/jpeg" ||
+    image.type !== "image/jpg" ||
+    image.type !== "image/gif" ||
+    image.type !== "image/png" ||
+    image.type !== "image/svg"
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+};
 class EditPost extends Component {
   constructor(props) {
     super(props);
@@ -26,11 +39,12 @@ class EditPost extends Component {
       const { post } = nextProps.post;
       this.setState({
         text: post.text,
-        title: post.title
+        title: post.title,
+        image: post.image
       });
     }
   }
-
+  onChangeImage = e => this.setState({ image: e.target.files[0] });
   onChange = e => {
     this.setState({
       [e.target.id]: e.target.value
@@ -44,7 +58,21 @@ class EditPost extends Component {
       username: user.username,
       title: this.state.title
     };
-    this.props.editPost(postData, this.props.post.post._id, this.props.history);
+    if (this.state.image !== undefined && !imageChecker(this.state.image)) {
+      this.setState({
+        errors: {
+          image:
+            "Your image is not valid. Please choose a smaller or valid image."
+        }
+      });
+    } else {
+      this.props.editPost(
+        postData,
+        this.props.post.post._id,
+        this.state.image,
+        this.props.history
+      );
+    }
     this.setState({ title: "", text: "" });
   };
   render() {
@@ -85,7 +113,25 @@ class EditPost extends Component {
               value={this.state.text}
               errors={errors.text ? errors.text : null}
             />
-
+            <br />
+            <div className="edit-image">
+              <input
+                className=""
+                type="file"
+                name="selectedFile"
+                onChange={this.onChangeImage}
+              />
+              {this.state.image ? (
+                <span className="edit-image-caption">
+                  Change your current picture above if you like
+                </span>
+              ) : (
+                <span className="edit-image-caption">
+                  Add a picture above if you want
+                </span>
+              )}
+            </div>
+            <br />
             <Button
               className="center button"
               type="primary"
