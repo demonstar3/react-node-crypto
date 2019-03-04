@@ -48,7 +48,7 @@ class AllPosts extends Component {
 
     if (this.props.auth.isAuthenticated) {
       createPost = (
-        <div className="center">
+        <div className="feed-post-button">
           {" "}
           <Link to={"make-a-post"}>
             <Button className=" block-button" type="primary" block>
@@ -59,7 +59,7 @@ class AllPosts extends Component {
       );
     } else {
       createPost = (
-        <div className="center">
+        <div className="feed-post-button">
           {" "}
           <Link to={"register"}>
             <Button className=" block-button" block type="primary">

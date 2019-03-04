@@ -2,6 +2,20 @@
   margin: 4% auto;
   width: 70%;
 }
+.posts-image {
+  max-width: 100%;
+  max-height: 400px;
+  margin: 3% auto;
+  display: block;
+}
+.post-feed-item-text {
+  white-space: pre-line;
+  color: rgba(0, 0, 0, 0.65);
+}
+.post-feed-title {
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, 0.65);
+}
 .post-text {
   font-size: 1.5em;
   margin: 5%;
@@ -54,13 +68,6 @@
   margin: 1% 0%;
 }
 
-.post-feed-item-text {
-  white-space: pre-line;
-  color: rgba(0, 0, 0, 0.65);
-}
-.post-feed-title {
-  color: rgba(0, 0, 0, 0.65);
-}
 .read-more {
   color: #1890ff;
 }
@@ -80,5 +87,13 @@
   }
   .delete-button {
     top: 10px;
+  }
+  .posts-item {
+    margin: 4% auto;
+    width: 90%;
+  }
+  .post-feed-title {
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.65);
   }
 }

@@ -2,21 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaGroup from "../../common/TextAreaGroup";
-import axios from "axios";
 import TextField from "../../common/TextField";
 import { withRouter } from "react-router-dom";
 import { addPost } from "../../../actions/postActions";
-import { Form, Button, Upload, Icon, Modal } from "antd";
+import { Form, Button } from "antd";
 import "../posts.css";
-import ImgUpload from "../../img_upload/ImgUpload";
 const imageChecker = image => {
   if (
     image.size > 200000 ||
-    image.type !== "image/jpeg" ||
-    image.type !== "image/jpg" ||
-    image.type !== "image/gif" ||
-    image.type !== "image/png" ||
-    image.type !== "image/svg"
+    (image.type !== "image/jpeg" &&
+      image.type !== "image/jpg" &&
+      image.type !== "image/gif" &&
+      image.type !== "image/png" &&
+      image.type !== "image/svg")
   ) {
     return false;
   } else {

@@ -69,7 +69,7 @@ class Home extends Component {
           <div className="about">
             <h1 className="center">Welcome!</h1>
             Welcome to Crypto-Net. Crypto-net is a social website for everything
-            crypto related. It's a place for crpyto fanatics to discuss
+            crypto related. It's a place for crypto fanatics to discuss
             everything from margin trading on bitmex to finding altcoin gems.
             Sign up below to get started and make your first post!{" "}
           </div>

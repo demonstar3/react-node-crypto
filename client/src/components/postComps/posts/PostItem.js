@@ -10,6 +10,7 @@ class PostItem extends Component {
   render() {
     const { post } = this.props;
     let postText;
+    let image;
     if (post.text.length >= 200) {
       postText = (
         <div className="post-feed-item-text">
@@ -20,9 +21,17 @@ class PostItem extends Component {
     } else {
       postText = <div className="post-feed-item-text">{post.text}</div>;
     }
+    if (post.hasOwnProperty("imageKey")) {
+      image = (
+        <div>
+          <img className="posts-image" src={post.image} alt={"Post"} />
+        </div>
+      );
+    } else {
+      image = null;
+    }
     return (
       <div>
-        {" "}
         <Card
           title={
             <Link className="post-feed-title" to={`/post/${post._id}`}>
@@ -34,6 +43,7 @@ class PostItem extends Component {
         >
           {" "}
           <Link to={`/post/${post._id}`}>
+            {image}
             <div>{postText}</div>
           </Link>
         </Card>
