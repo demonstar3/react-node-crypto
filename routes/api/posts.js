@@ -126,6 +126,7 @@ router.post(
   (req, res) => {
     let file = {};
     if (req.file === undefined) {
+      console.log(req.file);
       return res
         .status(404)
         .json({ error: "Your must select an image to upload" });
