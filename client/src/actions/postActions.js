@@ -41,20 +41,20 @@ export const addPost = (postData, history, image) => dispatch => {
       });
     });
 };
-export const editPost = (postData, id, image, history) => dispatch => {
+export const editPost = (postData, id, history, image) => dispatch => {
   axios
     .post(`/api/post/${id}`, postData)
     .then(
       res => {
-        if (image) {
-          dispatch(addPostImage(image, history, res.data._id));
+        if (image !== null) {
+          dispatch(addPostImage(image, history, id));
         } else {
           history.push(`/post/${res.data._id}`);
         }
       },
       res => {
-        if (image) {
-          dispatch(addPostImage(image, history, res.data._id));
+        if (image !== {}) {
+          dispatch(addPostImage(image, history, id));
         } else {
           dispatch({
             type: ADD_POST,
