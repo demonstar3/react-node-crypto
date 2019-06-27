@@ -52,7 +52,7 @@ class App extends Component {
             {" "}
             <div className="content">
               <Header />
-              <LeftBar />
+              {/* <LeftBar /> */}
 
               <div className="body">
                 <Switch>
@@ -88,7 +88,7 @@ class App extends Component {
                   <Route component={NotFound} />
                 </Switch>
               </div>
-              <RightBar />
+              {/* <RightBar /> */}
             </div>
             <PageFooter />
           </div>
