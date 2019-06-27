@@ -10,11 +10,11 @@ import "../posts.css";
 const imageChecker = image => {
   if (
     image.size > 200000 ||
-    image.type !== "image/jpeg" ||
-    image.type !== "image/jpg" ||
-    image.type !== "image/gif" ||
-    image.type !== "image/png" ||
-    image.type !== "image/svg"
+    (image.type !== "image/jpeg" &&
+      image.type !== "image/jpg" &&
+      image.type !== "image/gif" &&
+      image.type !== "image/png" &&
+      image.type !== "image/svg")
   ) {
     return false;
   } else {
@@ -27,7 +27,8 @@ class EditPost extends Component {
     this.state = {
       text: "",
       title: "",
-      errors: {}
+      errors: {},
+      image: {}
     };
   }
 
@@ -39,8 +40,7 @@ class EditPost extends Component {
       const { post } = nextProps.post;
       this.setState({
         text: post.text,
-        title: post.title,
-        image: post.image
+        title: post.title
       });
     }
   }
@@ -58,22 +58,22 @@ class EditPost extends Component {
       username: user.username,
       title: this.state.title
     };
-    if (this.state.image !== undefined && !imageChecker(this.state.image)) {
-      this.setState({
-        errors: {
-          image:
-            "Your image is not valid. Please choose a smaller or valid image."
-        }
-      });
+
+    if (this.state.image === undefined || !imageChecker(this.state.image)) {
+      this.props.editPost(
+        postData,
+        this.props.post.post._id,
+        this.props.history,
+        null
+      );
     } else {
       this.props.editPost(
         postData,
         this.props.post.post._id,
-        this.state.image,
-        this.props.history
+        this.props.history,
+        this.state.image
       );
     }
-    this.setState({ title: "", text: "" });
   };
   render() {
     let postForm;
@@ -123,13 +123,20 @@ class EditPost extends Component {
               />
               {this.state.image ? (
                 <span className="edit-image-caption">
-                  Change your current picture above if you like
+                  Change your current picture above if you like(Please note it
+                  will take a little bit for the image to change)
                 </span>
               ) : (
                 <span className="edit-image-caption">
                   Add a picture above if you want
                 </span>
               )}
+              {this.state.errors.image ? (
+                <span className="error">
+                  <br />
+                  {this.state.errors.image}
+                </span>
+              ) : null}
             </div>
             <br />
             <Button

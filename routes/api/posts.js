@@ -69,7 +69,6 @@ router.post(
           { $set: newPost },
           { new: true }
         ).then(post => res.json(post));
-        console.log(post);
       })
       .catch(err =>
         res.status(404).json({ postnotfound: "Post cannot be found" })
@@ -135,6 +134,7 @@ router.post(
     }
     Post.findById(req.params.id)
       .then(post => {
+        console.log(post);
         const newPost = {
           image: file.fileLoc,
           imageKey: file.imageKey
